@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: react-frontend
-          image: amolsontakke96/front-end:latest   # <-- change to your image
+          image: amolsontakke96/mern-frontend:latest   # <-- change to your image
           ports:
             - containerPort: 5173
           env:

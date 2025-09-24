@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: node-backend
-          image:  amolsontakke96/back-end:latest   # <-- replace with your Docker image
+          image:  amolsontakke96/mern-backend   # <-- replace with your Docker image
           ports:
             - containerPort: 4000
           env:
