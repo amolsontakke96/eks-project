@@ -3,6 +3,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: mongodb-secret
+  namespace: mongodb
 type: Opaque
 data:
   mongodb-root-password: bXlTdHJvbmdQYXNzd29yZDEyMw==
@@ -12,7 +13,9 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mongodb-pvc
+  namespace: mongodb
 spec:
+  storageClassName: gp2
   resources:
     requests:
       storage: 1Gi
@@ -24,6 +27,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
+  namespace: mongodb
   labels:
     app: mongodb
 spec:
@@ -37,7 +41,7 @@ spec:
         app: mongodb
     spec:
       containers:
-      - name: monogodb
+      - name: mongodb
         image: mongo:latest
         ports:
         - containerPort: 27017
@@ -62,6 +66,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo-service
+  namespace: mongodb
 spec:
   selector:
     app: mongodb
