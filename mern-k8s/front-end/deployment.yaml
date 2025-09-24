@@ -34,10 +34,10 @@ metadata:
   labels:
     app: react-frontend
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 5173
+    - port: 80
       targetPort: 5173
-      nodePort: 30007
+      protocol: TCP
   selector:
     app: react-frontend
