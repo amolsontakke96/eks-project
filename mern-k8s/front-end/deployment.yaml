@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: react-frontend
+  namespace: frontend
   labels:
     app: react-frontend
 spec:
@@ -28,6 +29,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: frontend
   name: react-frontend
   labels:
     app: react-frontend
