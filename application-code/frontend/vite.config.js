@@ -14,10 +14,7 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
-    allowedHosts: [
-      'a3bb049a5e2804f2ab7e9242ad4f9c7f-1657005513.us-east-1.elb.amazonaws.com:5173',
-      'a3bb049a5e2804f2ab7e9242ad4f9c7f-1657005513.us-east-1.elb.amazonaws.com',
-    ],
+    allowedHosts: ['*'],
   },
 });
 
