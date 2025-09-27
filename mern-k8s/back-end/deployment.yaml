@@ -17,15 +17,15 @@ spec:
     spec:
       containers:
         - name: node-backend
-          image:  amolsontakke96/mern-backend   # <-- replace with your Docker image
+          image:  amolsontakke96/mern-backend:latest   # <-- replace with your Docker image
           ports:
             - containerPort: 4000
           env:
             - name: PORT
               value: "4000"
             - name: MONGO_URI
-              value: "mongodb://mernuser:mernpass@mongo-service:27017/mernDB"   # <-- your MongoDB service name
-
+              #value: "mongodb://mernuser:mernpass@mongo-service.mongodb.svc.cluster.local:27017/mernDB"   # <-- your MongoDB service name
+              value : "mongodb://root:myStrongPassword123@mongo-service.mongodb.svc.cluster.local:27017/mernDB?authSource=admin"
 ---
 apiVersion: v1
 kind: Service
