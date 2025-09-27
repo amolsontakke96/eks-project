@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API = import.meta.env.VITE_API_URL;
 
-export const api = axios.create({ baseURL: '/api' });
+export const api = axios.create({ baseURL: '${API}/api', });
 
 
 export const listTodos = () => api.get('/todos').then(r => r.data);
