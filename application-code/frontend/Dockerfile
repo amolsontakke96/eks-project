@@ -17,13 +17,13 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy entrypoint script (for injecting env vars at runtime)
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+#COPY docker-entrypoint.sh /docker-entrypoint.sh
+#RUN chmod +x /docker-entrypoint.sh
 
 # Use custom nginx config if needed
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["nginx","-g","daemon off;"]
 
