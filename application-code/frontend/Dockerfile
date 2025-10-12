@@ -1,25 +1,29 @@
+# ---- Build Stage ----
 FROM node:20-alpine AS build
 
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm ci || npm install
 
 COPY . .
 
-ARG VITE_API_URL
-
-ENV VITE_API_URL=$VITE_API_URL
-
 RUN npm run build
 
+# ---- Runtime Stage ----
 FROM nginx:alpine
 
-COPY  --from=build /app/dist /usr/share/nginx/html
+# Copy build output
+COPY --from=build /app/dist /usr/share/nginx/html
 
+# Copy entrypoint script (for injecting env vars at runtime)
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
+# Use custom nginx config if needed
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
+

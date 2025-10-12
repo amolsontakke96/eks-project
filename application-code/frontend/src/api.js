@@ -1,11 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
+import apiUrl from "./config"; // ✅ runtime-aware config
 
-const API = import.meta.env.VITE_API_URL;
+export const api = axios.create({
+  baseURL: `${apiUrl}/api`, // ✅ template string resolved properly
+});
 
-export const api = axios.create({ baseURL: '${API}/api', });
-
-
-export const listTodos = () => api.get('/todos').then(r => r.data);
-export const createTodo = (title) => api.post('/todos', { title }).then(r => r.data);
-export const updateTodo = (id, data) => api.put(`/todos/${id}`, data).then(r => r.data);
+// API functions
+export const listTodos = () => api.get("/todos").then((r) => r.data);
+export const createTodo = (title) =>
+  api.post("/todos", { title }).then((r) => r.data);
+export const updateTodo = (id, data) =>
+  api.put(`/todos/${id}`, data).then((r) => r.data);
 export const deleteTodo = (id) => api.delete(`/todos/${id}`);
+
